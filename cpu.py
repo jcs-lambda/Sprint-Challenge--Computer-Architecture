@@ -437,6 +437,8 @@ if __name__ == '__main__':
     cur_dir = dirname(realpath(__file__))
     files = [
         join(cur_dir, 'sctest.ls8'),
+        join(cur_dir, 'keyboard.ls8'),
+        join(cur_dir, 'interrupts.ls8'),
     ]
     c = CPU()
     for f in files:
