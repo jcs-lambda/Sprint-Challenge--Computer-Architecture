@@ -433,18 +433,32 @@ class CPU:
 
 
 if __name__ == '__main__':
-    from os.path import dirname, join, realpath
-    cur_dir = dirname(realpath(__file__))
-    files = [
-        join(cur_dir, 'sctest.ls8'),
-        join(cur_dir, 'addi.ls8'),
-        join(cur_dir, 'keyboard.ls8'),
-        join(cur_dir, 'interrupts.ls8'),
-    ]
+    from os.path import dirname, exists, join, realpath
+    from sys import argv, exit
+
+    if len(argv) == 2:  # run a single file specified on command line
+        if exists(argv[1]):  # ensure file exists
+            files = [argv[1]]
+        else:
+            print(f'File not found: {argv[1]}')
+            exit(1)
+    else:  # run demonstration files
+        cur_dir = dirname(realpath(__file__))
+        files = [
+            join(cur_dir, 'sctest.ls8'),
+            join(cur_dir, 'addi.ls8'),
+            join(cur_dir, 'keyboard.ls8'),
+            join(cur_dir, 'interrupts.ls8'),
+        ]
+
     c = CPU()
     for f in files:
         name = f.split('/')[-1].split('.')[0]
-        print(f'{"-"*8}  {name}  {"-"*8}')
+        print(f'\n{"-"*8}  {name}  {"-"*8}')
+        if name == 'keyboard':
+            print('Press ESC to exit')
+        elif name == 'interrupts':
+            print('Press Control+C to break')
         c.load(f)
         try:
             c.run()
