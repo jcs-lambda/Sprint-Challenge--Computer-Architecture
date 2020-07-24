@@ -436,12 +436,13 @@ if __name__ == '__main__':
     from os.path import dirname, exists, join, realpath
     from sys import argv, exit
 
-    if len(argv) == 2:  # run a single file specified on command line
-        if exists(argv[1]):  # ensure file exists
-            files = [argv[1]]
-        else:
-            print(f'File not found: {argv[1]}')
-            exit(1)
+    if len(argv) > 1:  # run a single file specified on command line
+        files = []
+        for f in argv[1:]:
+            if exists(f):  # ensure file exists
+                files.append(f)
+            else:
+                print(f'File not found: {f}')
     else:  # run demonstration files
         cur_dir = dirname(realpath(__file__))
         files = [
