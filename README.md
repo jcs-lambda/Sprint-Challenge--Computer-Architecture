@@ -169,6 +169,19 @@ the material you just studied. Time allowing, stretch your limits and see if you
 can deliver on the following optional goals:
 
 - [X] Add the ALU operations: `AND` `OR` `XOR` `NOT` `SHL` `SHR` `MOD`
-- [ ] Add an `ADDI` extension instruction to add an immediate value to a register
+- [X] Add an `ADDI` extension instruction to add an immediate value to a register
 - [X] Add timer interrupts
 - [X] Add keyboard interrupts
+
+### ADDI
+
+`ADDI register immediate`
+
+Add an integer to the value in a register.
+
+Machine code:
+```
+10000000 00000rrr iiiiiiii
+80 0r ii
+```
+
